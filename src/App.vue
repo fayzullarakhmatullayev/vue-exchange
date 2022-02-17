@@ -1,30 +1,35 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="menu">
+          <router-link class="nav-link" to="/">Список валют</router-link>
+          <router-link class="nav-link" to="/converter">Конвертер</router-link>
+        </div>
+        <div class="date">{{ $store.getters.currentDate }}</div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <router-view />
   </div>
-  <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+<script>
+export default {
+  data() {
+    return {
+      interval: null,
+    };
+  },
+  mounted() {
+    this.$store.dispatch("getDate");
+    this.interval = setInterval(() => {
+      this.$store.dispatch("getDate");
+    }, 10000);
+  },
+  unmounted() {
+    clearInterval(this.interval);
+  },
+};
+</script>
