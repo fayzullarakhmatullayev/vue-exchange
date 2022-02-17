@@ -68,7 +68,7 @@
               {{ cur.CharCode }}
             </option>
           </select>
-          <div type="number" class="card-input card-input_two"></div>
+          <div class="card-input card-input_two"></div>
         </div>
       </div>
     </div>
